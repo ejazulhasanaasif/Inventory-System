@@ -81,8 +81,8 @@ namespace Inventory
                                     ddlVendor.DataTextField = "vendor_name";
                                     ddlVendor.DataValueField = "id";
                                     ddlVendor.DataBind();
-
                                 }
+                                ddlVendor.Items.Insert(0, "--Select Vendor--");
                             }
                         }
                     }
@@ -115,8 +115,8 @@ namespace Inventory
                                     ddlItem.DataTextField = "item_name";
                                     ddlItem.DataValueField = "id";
                                     ddlItem.DataBind();
-
                                 }
+                                ddlItem.Items.Insert(0, "--Select Item--");
                             }
                         }
                     }

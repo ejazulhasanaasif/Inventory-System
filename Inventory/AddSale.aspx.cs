@@ -208,12 +208,13 @@ namespace Inventory
 
                     else
                     {
-                        ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ClientScript", "alert('value must be less than available quantity!')", true);
+                        ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ClientScript", "alert('Quantity is too much "+myQty+" must be less than available quantity!')", true);
                     }
 
                 }
+                this.ResetControl();
                 //ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ClientScript", "alert('Data Successfully Submitted!')", true);
-                Response.Redirect("SaleList.aspx", false);
+                //Response.Redirect("SaleList.aspx", false);
             }
             catch (Exception ex)
             {

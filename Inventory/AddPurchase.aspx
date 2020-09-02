@@ -186,7 +186,6 @@
         </Triggers>
     </asp:UpdatePanel>
 
-
     <script type="text/javascript">
         function calculate() {
 

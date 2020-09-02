@@ -34,8 +34,6 @@
                                         <th style="display: none">Id</th>
                                         <th>SlNo</th>
                                          <th>Items</th>
-                                        <th>Purchase Quantity</th>
-                                        <th>Sale Quantity</th>
                                         <th>Avalaible Quantity</th>
                                         <th>Print</th>
                                     </tr>
@@ -51,25 +49,10 @@
                                                     <asp:Label ID="lbl_rptsno" runat="server" Text='<%# Container.ItemIndex + 1 %>'></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:Label ID="lbl_rptinvoice" runat="server" Text='<%# Eval("invoice") %>'></asp:Label>
+                                                    <asp:Label ID="lbl_rptitem_name" runat="server" Text='<%# Eval("item_name") %>'></asp:Label>
                                                 </td>
                                                 <td>
-                                                    <asp:Label ID="lbl_rptsale_date" runat="server" Text='<%# Eval("sale_date") %>'></asp:Label>
-                                                </td>
-                                                <td>
-                                                    <asp:Label ID="lbl_rptcustomer_name" runat="server" Text='<%# Eval("customer_name") %>'></asp:Label>
-                                                </td>
-                                                <td>
-                                                    <asp:Label ID="lbl_rptbase_price" runat="server" Text='<%# Eval("base_price") %>'></asp:Label>
-                                                </td>
-                                                <td>
-                                                    <asp:Label ID="lbl_rptgst_price" runat="server" Text='<%# Eval("gst_price") %>'></asp:Label>
-                                                </td>
-                                                <td>
-                                                    <asp:Label ID="lbl_rptdiscount" runat="server" Text='<%# Eval("discount") %>'></asp:Label>
-                                                </td>
-                                                <td>
-                                                    <asp:Label ID="lbl_rptpayble" runat="server" Text='<%# Eval("payble") %>'></asp:Label>
+                                                    <asp:Label ID="lbl_rptquantity" runat="server" Text='<%# Eval("quantity") %>'></asp:Label>
                                                 </td>
                                                 <td>
                                                     <asp:LinkButton ID="lb_PurchasePrint" runat="server" CommandName="PrintRecord" CommandArgument='<%# Eval("id") %>'><i class='fas fa-print'></i></asp:LinkButton>

@@ -29,7 +29,7 @@ namespace Inventory
             {
                 loSqlConnection = new SqlConnection(cs);
                 loSqlConnection.Open();
-                string queryForGrid = "Select p.id,p.invoice,p.purchase_date,p.vender_id,p.base_price,p.gst_price,p.discount,p.payble,v.id,v.vendor_name as vendorName from tbl_purchase as p join tbl_vendor as v on v.id=p.id where p.status <> 0";
+                string queryForGrid = "SELECT p.id, P.vender_id, P.purchase_date, P.invoice, P.base_price, P.gst_price, P.discount, P.payble, V.vendor_name as vendorName  FROM tbl_purchase P JOIN tbl_vendor V ON P.vender_id = V.id WHERE P.status <> 0 AND V.status <> 0";
                 loSqlCommand = new SqlCommand(queryForGrid, loSqlConnection);
                 loSqlDataAdapter = new SqlDataAdapter(loSqlCommand);
                 loDataTable = new DataTable();

@@ -21,8 +21,6 @@ namespace Inventory
             if (!this.IsPostBack)
             {
                 this.BindRepeater();
-
-
             }
         }
 

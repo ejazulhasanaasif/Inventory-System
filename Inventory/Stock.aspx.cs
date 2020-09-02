@@ -10,31 +10,69 @@ namespace Inventory
 {
     public partial class Stock : System.Web.UI.Page
     {
-        SqlConnection con;
-        SqlCommand cmd;
+        SqlConnection loSqlConnection = null;
+        SqlCommand loSqlCommand = null;
+        SqlDataAdapter loSqlDataAdapter = null;
+        DataTable loDataTable = null;
         string cs = ConfigurationManager.ConnectionStrings["mydb"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!this.IsPostBack)
             {
-                DataTable dt = this.GetData();
-                //Append the HTML string to Placeholder.
-                //PlaceHolder1.Controls.Add(new Literal { Text = GetTable(dt) });
+                this.BindRepeater();
             }
         }
+
+        private void AddPlaceholder()
+        {
+            DataTable dt = this.GetData();
+            //Append the HTML string to Placeholder.
+            //PlaceHolder1.Controls.Add(new Literal { Text = GetTable(dt) });
+        }
+
+
+        #region bind data to RepeaterPurchaseList  
+        private void BindRepeater()
+        {
+            try
+            {
+                loSqlConnection = new SqlConnection(cs);
+                loSqlConnection.Open();
+                string queryForGrid = "select i.id,i.item_name,p.quantity from tbl_item as i right join tbl_purchaseDetails as p on i.id= p.item_id";
+                loSqlCommand = new SqlCommand(queryForGrid, loSqlConnection);
+                loSqlDataAdapter = new SqlDataAdapter(loSqlCommand);
+                loDataTable = new DataTable();
+                loSqlDataAdapter.Fill(loDataTable);
+                rpt.DataSource = loDataTable;
+                rpt.DataBind();
+
+            }
+            catch (SqlException ex)
+            {
+                Response.Write(ex.Message);
+            }
+            finally
+            {
+                if (loSqlConnection.State == ConnectionState.Open)
+                {
+                    loSqlConnection.Close();
+                }
+            }
+        }
+        #endregion
 
         public DataTable GetData(string command = @"select id,invoice,invoice_date,customer_name,mobile,address,sale_date,item_id,sale_price,gst_price,discount,payble from tbl_sale")
         {
 
-            using (con = new SqlConnection(cs))
+            using (loSqlConnection = new SqlConnection(cs))
             {
-                using (cmd = new SqlCommand(command, con))
+                using (loSqlCommand = new SqlCommand(command, loSqlConnection))
                 {
 
-                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    using (SqlDataAdapter da = new SqlDataAdapter(loSqlCommand))
                     {
-                        cmd.Connection = con;
-                        da.SelectCommand = cmd;
+                        loSqlCommand.Connection = loSqlConnection;
+                        da.SelectCommand = loSqlCommand;
                         using (DataTable dt = new DataTable())
                         {
                             da.Fill(dt);
